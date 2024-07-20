@@ -1,2 +1,2 @@
 # web_social
-Web social CRUD with Django
+Web social CRUD with Django.
