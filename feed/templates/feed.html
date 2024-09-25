@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load custom_tags %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/feed.css' %}">
+
+<div class="container">
+    <div class="create-post">
+        {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit">Postar</button>
+        </form>
+        {% endif %}
+    </div>
+
+    <div class="feed">
+        {% if feed %}
+            {% for post in feed %}
+                <div class="post">
+                    <h1>{{ post.title }}</h1>
+                    <p>{{ post.message }}</p>
+                    <small><time><i>{{ post.created_at }}</i></time></small>
+                    <a href="{% url 'perfil_usuario' post.author.id %}">@{{ post.author }}</a>
+                    <div>
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'like_post' post.id %}" method="post">
+                                {% csrf_token %}
+                                <button data-post-id="{{ post.id }}" class="like-btn">
+                                    {% if post.id in liked_posts %}
+                                        ❤️ {{ post_likes|get_item:post.id }}
+                                    {% else %}
+                                        🤍 {{ post_likes|get_item:post.id }}
+                                    {% endif %}
+                                </button>
+                            </form>
+                            {% if post.author == user %}
+                                <a class="post_delete" href="{% url 'post_delete' post_id=post.id %}">🗑️Deletar</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Script para manipular likes e edição via AJAX -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.like-btn').on('click', function(e) {
+            e.preventDefault();
+            var postId = $(this).data('post-id');
+            var likeBtn = $(this);
+
+            $.ajax({
+                url: "{% url 'like_post' post_id=0 %}".replace('0', postId),
+                method: "POST",
+                data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.liked) {
+                        likeBtn.html('❤️ ' + response.total_likes);
+                    } else {
+                        likeBtn.html('🤍 ' + response.total_likes);
+                    }
+                }
+            });
+        });
+    });
+
+</script>
+{% endblock %}
+

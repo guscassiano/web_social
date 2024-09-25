@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-photo">
+            {% if user.perfil.photo %}
+                <img src="{{ user.perfil.photo.url }}" alt="Foto de perfil" class="profile-img">
+            {% else %}
+                <img src="\media\perfil-sem-foto-220615.png" alt="Foto de perfil" class="profile-img">
+            {% endif %}
+        </div>
+        <div class="profile-info">
+            <h2>{{ user.username }}</h2>
+            <p><b>Email:</b> {{ user.email }}</p>
+            {% if user.perfil.description %}
+                <b>Nome:</b> {{ user.first_name }} {{ user.last_name }}</p>
+            {% else %}
+                <p>Adicione seu nome ao seu perfil.</p>
+            {% endif %}
+            {% if user.perfil.description %}
+                <b>Bio:</b> {{ user.perfil.description }}</p>
+            {% else %}
+                <p>Adicione uma bio ao seu perfil.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="profile-edit">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ user_form.as_table }}
+                {{ form.as_table }}
+            </table>
+            <button type="submit" class="btn-save">Salvar alterações</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
