@@ -1,4 +1,4 @@
-# 🌐 **Tuwit (Web Social)** - Sua Rede Social Personalizada 🐦
+# 🌐 **Tuwit** - Sua Rede Social Personalizada 🐦
 
 ### **Bem-vindo ao Tuwit!**
 O Tuwit (ou Web Social) é uma aplicação de microblogging inspirada no Twitter, onde os usuários podem postar atualizações curtas, curtí-las e seguir outros perfis. Construído com as mais modernas tecnologias, o Tuwit oferece uma experiência rápida e interativa para todos os usuários.
