@@ -1,0 +1,29 @@
+version: '2.27.0'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:16.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=tuwit_user
+      - POSTGRES_PASSWORD=tuwit@20XX
+      - POSTGRES_DB=tuwit
+    ports:
+      - 5433:5432
+    restart: always
+
+volumes:
+  postgres_data:

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/post_delete.css' %}">
+
+<div class="container">
+    <h1>Confirmação de Exclusão</h1>
+    <p>Tem certeza que deseja deletar o post <b>"{{ object.title }}"</b>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+        <a href="{% url 'feed' %}" class="cancel-link">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <span style="color: red;">{{user_form.username.errors}}</span>
+                <label style="margin-right: 88px;">Usuário: </label>
+                {{ user_form.username }}
+            </div>
+            <div class="form-group" >
+                <span style="color: red;">{{user_form.email.errors}}</span>
+                <label style="margin-right: 100px;">E-mail: </label>
+                {{ user_form.email }}
+            </div>
+            <div class="form-group">
+                <span style="color: red;">{{user_form.password1.errors}}</span>
+                <label style="margin-right: 100px;">Senha: </label>
+                {{ user_form.password1 }}
+            </div>
+            <div class="form-group">
+                <span style="color: red;">{{user_form.password2.errors}}</span>
+                <label>Confirme a senha: </label>
+                {{ user_form.password2 }}
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar usuário">
+            </div>
+        </form>
+    </div>
+{% endblock %}

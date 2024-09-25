@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUWIT</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <header>
+        <h1>TUWIT</h1>
+        <nav>
+            <ul>
+                {% if not user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}">Registrar-se</a>
+                    </li>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    {% if user.perfil %}
+                        {% if user.perfil.photo %}
+                            <li>
+                                <img src="{{ user.perfil.photo.url }}" alt="Foto de perfil" width="24px" style="border-radius: 50%;">
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a href="{% url 'perfil' pk=user.perfil.pk %}">Perfil</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a href="{% url 'feed' %}">Feed</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Tuwit - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>

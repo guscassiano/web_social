@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/perfil_users.css' %}">
+<div class="container">
+    <div class="follow-info">
+        <p>{{ seguidores }} Seguidores</p>
+        <p>{{ seguindo }} Seguindo</p>
+    </div>
+    <div>
+        {% if perfil_usuario != user  %}
+            <form method="POST" action="{% url 'follow_user' perfil_usuario.id %}">
+                {% csrf_token %}
+                {% if is_following %}
+                    <button type="submit">Deixar de seguir</button>
+                {% else %}
+                    <button type="submit">Seguir</button>
+                {% endif %}
+            </form>
+        {% endif %}
+    </div>
+    <div class="profile-image">
+        {% if perfil_usuario.perfil.photo %}
+            <img src="{{ perfil_usuario.perfil.photo.url }}" alt="Foto de perfil" width="120px" style="border-radius: 50%; margin: 16px 16px 0;">
+        {% else %}
+            <img src="\media\perfil-sem-foto-220615.png" alt="Foto de perfil" width="120px" style="border-radius: 50%; margin: 16px 16px 0;">
+        {% endif %}
+    </div>
+
+    <div class="profile-info">
+        <table>
+            <tr>
+                <td>Nome:</td>
+                <td>{{ perfil_usuario.username }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ perfil_usuario.email }}</td>
+            </tr>
+            <tr>
+                <td>Descrição:</td>
+                <td>{{ perfil_usuario.perfil.description }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
