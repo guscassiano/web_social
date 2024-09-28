@@ -38,12 +38,17 @@ Siga estas instruções para configurar e rodar o projeto na sua máquina local:
     cd web_social
     ```
 
-3. **Build dos containers com Docker**:
+3. **Instale as dependências do projeto**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+    
+4. **Build dos containers com Docker**:
     ```bash
     docker-compose up --build
     ```
 
-4. **Acesse o Tuwit no navegador**:
+5. **Acesse o Tuwit no navegador**:
     O projeto estará disponível em: `http://localhost:8000/`
 
 ---
