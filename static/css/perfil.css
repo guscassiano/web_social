@@ -74,3 +74,18 @@ button.btn-save {
 button.btn-save:hover {
     background-color: #007bb5;
 }
+
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 95%;
+    }
+    .profile-header {
+        display: block;
+    }
+    .profile-edit input[type="text"],
+    .profile-edit textarea {
+        max-width: 240px;
+        box-sizing: border-box;
+    }
+}

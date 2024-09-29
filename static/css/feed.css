@@ -27,9 +27,12 @@ body {
     position: fixed;
 }
 
+
+.create-post input[type="text"],
 .create-post textarea {
     resize: none;
-    border-radius: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 
 .create-post button {
@@ -53,7 +56,7 @@ body {
 .post {
     background-color: #fff;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -72,7 +75,7 @@ button {
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: all 0.3s ease;
     margin-bottom: 16px;
 }
@@ -94,4 +97,40 @@ button:hover {
 
 .post_delete:hover {
     background-color: #c0392b;
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        display: block;
+    }
+
+    .create-post {
+        padding: 0px;
+    }
+
+    .create-post form {
+        position: static;
+        max-width: 280px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-bottom: 32px;
+    }
+
+    .create-post input[type="text"],
+    .create-post textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .create-post button {
+        width: 60%;
+        background-color: #32bbe8;
+        color: white;
+        margin-left: 0px;
+    }
 }
